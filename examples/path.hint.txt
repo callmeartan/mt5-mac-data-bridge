@@ -1,0 +1,3 @@
+Set the environment variable MT5_FILES_DIR to your MT5 DataFolder's MQL5/Files path.
+Example:
+MT5_FILES_DIR="/path/to/MetaTrader 5/MQL5/Files"

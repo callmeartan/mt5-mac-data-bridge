@@ -1,0 +1,10 @@
+{
+  "action": "buy",
+  "symbol": "XAUUSD",
+  "lot_size": 0.01,
+  "stop_loss": null,
+  "take_profit": null,
+  "comment": "example",
+  "magic_number": 12345,
+  "trade_id": "example-0001"
+}

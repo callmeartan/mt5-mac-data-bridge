@@ -1,0 +1,27 @@
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+
+# MQL5 builds
+*.ex5
+*.mqproj
+
+# Logs & runtime files
+logs/
+*.log
+*.tmp
+
+# MT5 Data paths (edit your local path as needed)
+MQL5/Files/*.json
+Files/*.json
+
+# IDE
+.vscode/
+.idea/

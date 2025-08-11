@@ -82,6 +82,10 @@ Professional, open-source bridge for running MetaTrader 5 (MT5) with Python on m
 - **MT5_TIMEOUT_SEC**: heartbeat timeout for file updates (default: `30`)
 
 ## Install and run the bridge
+## Developer usage
+
+See detailed guide in `docs/usage.md` for how to import `mt5_bridge` in your code, place orders, read positions and account info, and stream trade results.
+
 
 Install (editable) and run the CLI:
 

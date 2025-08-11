@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/mt5_bridge/__init__.py
+src/mt5_bridge/cli.py
+src/mt5_bridge/config.py
+src/mt5_bridge/connector.py
+src/mt5_mac_file_bridge.egg-info/PKG-INFO
+src/mt5_mac_file_bridge.egg-info/SOURCES.txt
+src/mt5_mac_file_bridge.egg-info/dependency_links.txt
+src/mt5_mac_file_bridge.egg-info/entry_points.txt
+src/mt5_mac_file_bridge.egg-info/top_level.txt

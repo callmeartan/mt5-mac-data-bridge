@@ -1,0 +1,2 @@
+[console_scripts]
+mt5-bridge = mt5_bridge.cli:main

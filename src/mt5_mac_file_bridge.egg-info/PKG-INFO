@@ -1,3 +1,42 @@
+Metadata-Version: 2.4
+Name: mt5-mac-file-bridge
+Version: 0.1.0
+Summary: File-based Python bridge for MetaTrader 5 on macOS (prices, positions, commands)
+Author: Artan Ahmadi
+License: MIT License
+        
+        Copyright (c) 2025 Artan Ahmadi
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Homepage, https://github.com/artanxyz/mt5-mac-data-bridge
+Keywords: metatrader5,mt5,trading,macos,forex,bridge
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Office/Business :: Financial :: Investment
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
+
 ## MT5 Mac File Bridge
 
 Professional, open-source bridge for running MetaTrader 5 (MT5) with Python on macOS — without the `MetaTrader5` Python package. The bridge uses a robust, local JSON file IPC so you can stream quotes, monitor positions, and submit trading commands reliably on macOS.
@@ -16,7 +55,7 @@ Professional, open-source bridge for running MetaTrader 5 (MT5) with Python on m
 - The **EA** `mt5/MT5_File_Bridge_Enhanced.mq5` runs inside MT5 and periodically writes:
   - `{SYMBOL}_price.json` (quotes), `{SYMBOL}_tick.json` (tick snapshot), `{SYMBOL}_orderbook.json` (depth, if available)
   - `account_info.json`, `positions.json`, `closed_trades.json`, `orders.json`, `rates_M1.json`, `symbol_info.json`
-- The **Python bridge** package `mt5_bridge` reads those files and writes a flat `commands.json` for actions: `buy`, `sell`, `modify`, `close`. The EA executes and logs results to `trade_results.txt`.
+- The **Python bridge** `src/python/mt5_connector.py` reads those files and writes a flat `commands.json` for actions: `buy`, `sell`, `modify`, `close`. The EA executes and logs results to `trade_results.txt`.
 
 ## Features
 
@@ -81,25 +120,11 @@ Professional, open-source bridge for running MetaTrader 5 (MT5) with Python on m
 - **MT5_PRICE_FILE**: override price file name (e.g., `XAUUSD!_price.json`)
 - **MT5_TIMEOUT_SEC**: heartbeat timeout for file updates (default: `30`)
 
-## Install and run the bridge
-
-Install (editable) and run the CLI:
+## Run the bridge
 
 ```bash
-pip install -e .
 export MT5_FILES_DIR="/path/to/MetaTrader 5/MQL5/Files"
-mt5-bridge --log-level INFO
-```
-
-Or use the Python API:
-
-```python
-from mt5_bridge import MT5Connector
-
-connector = MT5Connector()
-connector.connect()
-md = connector.get_market_data()
-print(md)
+python3 src/python/mt5_connector.py
 ```
 
 You should see a connection status and the latest price snapshot. To place a trade, the bridge writes `commands.json` and the EA executes it.
@@ -141,17 +166,14 @@ mt5-mac-file-bridge/
 ├─ mt5/
 │  └─ MT5_File_Bridge_Enhanced.mq5
 ├─ src/
-│  └─ mt5_bridge/
-│     ├─ __init__.py
-│     ├─ connector.py
-│     ├─ config.py
-│     └─ cli.py
+│  └─ python/
+│     ├─ mt5_connector.py
+│     └─ config_manager.py
 ├─ examples/
 │  ├─ commands.example.json
 │  └─ path.hint.txt
 ├─ docs/
 │  └─ architecture.md
-├─ pyproject.toml
 ├─ LICENSE
 ├─ CODE_OF_CONDUCT.md
 ├─ CONTRIBUTING.md

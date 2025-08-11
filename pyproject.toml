@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mt5-mac-file-bridge"
+version = "0.1.0"
+description = "File-based Python bridge for MetaTrader 5 on macOS (prices, positions, commands)"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Artan Ahmadi" }
+]
+keywords = ["metatrader5", "mt5", "trading", "macos", "forex", "bridge"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: MacOS",
+  "Intended Audience :: Developers",
+  "Topic :: Office/Business :: Financial :: Investment",
+]
+
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/artanxyz/mt5-mac-data-bridge"
+
+[project.scripts]
+mt5-bridge = "mt5_bridge.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["mt5_bridge*"]
+exclude = []
+
+

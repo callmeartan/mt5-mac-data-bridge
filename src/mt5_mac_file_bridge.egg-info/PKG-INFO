@@ -55,7 +55,7 @@ Professional, open-source bridge for running MetaTrader 5 (MT5) with Python on m
 - The **EA** `mt5/MT5_File_Bridge_Enhanced.mq5` runs inside MT5 and periodically writes:
   - `{SYMBOL}_price.json` (quotes), `{SYMBOL}_tick.json` (tick snapshot), `{SYMBOL}_orderbook.json` (depth, if available)
   - `account_info.json`, `positions.json`, `closed_trades.json`, `orders.json`, `rates_M1.json`, `symbol_info.json`
-- The **Python bridge** `src/python/mt5_connector.py` reads those files and writes a flat `commands.json` for actions: `buy`, `sell`, `modify`, `close`. The EA executes and logs results to `trade_results.txt`.
+- The **Python bridge** package `mt5_bridge` reads those files and writes a flat `commands.json` for actions: `buy`, `sell`, `modify`, `close`. The EA executes and logs results to `trade_results.txt`.
 
 ## Features
 
@@ -120,11 +120,29 @@ Professional, open-source bridge for running MetaTrader 5 (MT5) with Python on m
 - **MT5_PRICE_FILE**: override price file name (e.g., `XAUUSD!_price.json`)
 - **MT5_TIMEOUT_SEC**: heartbeat timeout for file updates (default: `30`)
 
-## Run the bridge
+## Install and run the bridge
+## Developer usage
+
+See detailed guide in `docs/usage.md` for how to import `mt5_bridge` in your code, place orders, read positions and account info, and stream trade results.
+
+
+Install (editable) and run the CLI:
 
 ```bash
+pip install -e .
 export MT5_FILES_DIR="/path/to/MetaTrader 5/MQL5/Files"
-python3 src/python/mt5_connector.py
+mt5-bridge --log-level INFO
+```
+
+Or use the Python API:
+
+```python
+from mt5_bridge import MT5Connector
+
+connector = MT5Connector()
+connector.connect()
+md = connector.get_market_data()
+print(md)
 ```
 
 You should see a connection status and the latest price snapshot. To place a trade, the bridge writes `commands.json` and the EA executes it.
@@ -166,14 +184,17 @@ mt5-mac-file-bridge/
 ├─ mt5/
 │  └─ MT5_File_Bridge_Enhanced.mq5
 ├─ src/
-│  └─ python/
-│     ├─ mt5_connector.py
-│     └─ config_manager.py
+│  └─ mt5_bridge/
+│     ├─ __init__.py
+│     ├─ connector.py
+│     ├─ config.py
+│     └─ cli.py
 ├─ examples/
 │  ├─ commands.example.json
 │  └─ path.hint.txt
 ├─ docs/
 │  └─ architecture.md
+├─ pyproject.toml
 ├─ LICENSE
 ├─ CODE_OF_CONDUCT.md
 ├─ CONTRIBUTING.md

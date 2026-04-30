@@ -176,9 +176,9 @@ void WriteSymbolInfo(string sym)
    j+="\"volume_step\":"     + DoubleToString(SymbolInfoDouble(sym, SYMBOL_VOLUME_STEP), 2) + ",";
    j+="\"tick_size\":"       + DoubleToString(SymbolInfoDouble(sym, SYMBOL_TRADE_TICK_SIZE), 8) + ",";
    j+="\"tick_value\":"      + DoubleToString(SymbolInfoDouble(sym, SYMBOL_TRADE_TICK_VALUE), 5) + ",";
-   j+="\"stops_level\":"     + IntegerToString((int)SymbolInfoInteger(sym, SYMBOL_STOPS_LEVEL)) + ",";
-   j+="\"freeze_level\":"    + IntegerToString((int)SymbolInfoInteger(sym, SYMBOL_FREEZE_LEVEL)) + ",";
-   j+="\"swap_type\":"       + IntegerToString((int)SymbolInfoInteger(sym, SYMBOL_SWAP_TYPE)) + ",";
+   j+="\"stops_level\":"     + IntegerToString((int)  SymbolInfoInteger(sym, SYMBOL_TRADE_STOPS_LEVEL)) + ",";
+   j+="\"freeze_level\":"    + IntegerToString((int)SymbolInfoInteger(sym, SYMBOL_TRADE_FREEZE_LEVEL)) + ",";
+   j+="\"swap_type\":"       + IntegerToString((int)SymbolInfoInteger(sym, SYMBOL_SWAP_MODE)) + ",";
    j+="\"swap_long\":"       + DoubleToString(SymbolInfoDouble(sym, SYMBOL_SWAP_LONG), 5) + ",";
    j+="\"swap_short\":"      + DoubleToString(SymbolInfoDouble(sym, SYMBOL_SWAP_SHORT), 5) + ",";
    j+="\"trade_mode\":"      + IntegerToString((int)SymbolInfoInteger(sym, SYMBOL_TRADE_MODE));
@@ -573,7 +573,7 @@ bool EnforceStopsLevel(string sym, double &sl, double &tp, double open_price, bo
    int    digits      = (int)SymbolInfoInteger(sym, SYMBOL_DIGITS);
    double tick        = SymbolInfoDouble(sym, SYMBOL_TRADE_TICK_SIZE);
    if(tick <= 0.0) tick = SymbolInfoDouble(sym, SYMBOL_POINT);
-   int    stops_level = (int)SymbolInfoInteger(sym, SYMBOL_STOPS_LEVEL);
+   int    stops_level = (int)SymbolInfoInteger(sym, SYMBOL_TRADE_STOPS_LEVEL);
    double min_dist    = stops_level * tick;
 
    bool ok = true;

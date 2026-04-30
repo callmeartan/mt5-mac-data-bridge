@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 
 @dataclass
@@ -64,5 +64,4 @@ class BridgeConfig:
 
 def get_config() -> BridgeConfig:
     return BridgeConfig()
-
 
